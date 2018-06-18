@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyB30cujbHt9rbrrgd8X8GK1VCD5PnM-2Pk",
+    authDomain: "recepie-app.firebaseapp.com",
+    databaseURL: "https://recepie-app.firebaseio.com",
+    projectId: "recepie-app",
+    storageBucket: "recepie-app.appspot.com",
+    messagingSenderId: "770766576838"
+  }
 };
 
 /*
