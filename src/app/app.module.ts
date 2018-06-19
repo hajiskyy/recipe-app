@@ -5,6 +5,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from "../environments/environment";
+import { RecepiesService } from "./services/recepies.service";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,7 +42,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AngularFireStorageModule,
     AngularFirestoreModule
   ],
-  providers: [],
+  providers: [
+    RecepiesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

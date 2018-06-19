@@ -11,7 +11,6 @@ import { RegisterFormComponent } from "./components/register-form/register-form.
 
 const routes: Routes = [
   { path:'', component:FeedComponent  },
-  { path:'feed', component: FeedComponent },
   { path:'login', component:LoginFormComponent  },
   { path:'register', component:RegisterFormComponent  },
   { path:'recepies', component: RecepiesComponent,

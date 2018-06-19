@@ -1,3 +1,95 @@
-<p>
-  feed works!
-</p>
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="assets/img/background.jpeg">
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="container">
+      <h4 class="center-align">Highest rated</h4>
+      <div class="carousel carousel-slider">
+        <ul *ngFor="let item of recepies">
+          <li>
+            <div class="card carousel-item">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="{{item.imageUrl}}">
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{item.name}}
+                  <i class="material-icons right">more_vert</i>
+                </span>
+                <p>
+                  <strong>rating: </strong>4.6</p>
+              </div>
+              <div class="card-action">
+                <a href="#">See more</a>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">description
+                  <i class="material-icons right">close</i>
+                </span>
+                <p>{{item.description}}</p>
+                <p>
+                  <strong>Difficulty: </strong> {{item.difficulty}}</p>
+                <p>
+                  <strong>Time needed: </strong> {{item.time}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section grey darken-3">
+  <div class="container">
+    <p class="center-align white-text" id="detail"> 
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. In iste laborum repellendus voluptate error. Consequuntur accusantium
+      soluta nostrum nisi doloremque, aut minima veniam provident sint vitae? Vel cupiditate ipsam eius atque laudantium!
+      Sunt fuga ducimus, doloremque harum alias rem omnis ex ad assumenda dignissimos facere veniam ut illo nesciunt quos.
+    </p>
+  </div>
+</div>
+
+<div class="parallax-container">
+  <div class="parallax">
+    <img src="assets/img/food.jpg">
+  </div>
+</div>
+
+<footer class="page-footer grey darken-3">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Company Bio</h5>
+        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support
+          and continue development on this project and is greatly appreciated.</p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Connect</h5>
+        <ul>
+          <li>
+            <a class="white-text" href="#!">Link 1</a>
+          </li>
+          <li>
+            <a class="white-text" href="#!">Link 2</a>
+          </li>
+          <li>
+            <a class="white-text" href="#!">Link 3</a>
+          </li>
+          <li>
+            <a class="white-text" href="#!">Link 4</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Made by
+      <a class="brown-text text-lighten-3" href="http://materializecss.com">Hajisky</a>
+    </div>
+  </div>
+</footer>
