@@ -1,0 +1,62 @@
+<nav>
+  <div class="nav-wrapper white">
+    <div class="container">
+      <a routerLink='/' class="brand-logo">Resi P app</a>
+      <a href="#" data-target="slide-out" class="sidenav-trigger" (click)="sideNav($event)">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a routerLink='/feed'>Home</a>
+        </li>
+        <li>
+          <a routerLink='/recepies'>recepies</a>
+        </li>
+        <li>
+          <a routerLink='/login'>login</a>
+        </li>
+        <li>
+          <a routerLink='/register'>Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="assets/img/sideNavBg.jpg">
+      </div>
+      <a routerLink="/account" class="sidenav-close">
+        <img class="circle" src="assets/img/a.jpg">
+      </a>
+        <span class="white-text name">John Doe</span>
+        <span class="white-text email">jdandturk@gmail.com</span>
+    </div>
+  </li>
+  <li>
+    <a href="#!" class="sidenav-close">
+      <i class="material-icons">account_circle</i>view profile</a>
+  </li>
+  <li>
+    <a href="#!" class="sidenav-close">
+      <i class="material-icons">settings</i>settings
+    </a>
+  </li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a routerLink='/feed' class="sidenav-close"><i class="material-icons">home</i>Home</a>
+  </li>
+  <li>
+    <a routerLink='/recepies' class="sidenav-close"> <i class="material-icons">local_dining</i> recepies</a>
+  </li>
+  <li>
+    <a routerLink='/login' class="sidenav-close"><i class="material-icons">person</i>login</a>
+  </li>
+  <li>
+    <a routerLink='/register' class="sidenav-close"><i class="material-icons">person_add</i>Register</a>
+  </li>
+</ul>

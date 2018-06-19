@@ -16,6 +16,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AddRecepieFormComponent } from './components/add-recepie-form/add-recepie-form.component';
 import { EditRecepieFormComponent } from './components/edit-recepie-form/edit-recepie-form.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { EditRecepieFormComponent } from './components/edit-recepie-form/edit-re
     LoginFormComponent,
     RegisterFormComponent,
     AddRecepieFormComponent,
-    EditRecepieFormComponent
+    EditRecepieFormComponent,
+    NavbarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
