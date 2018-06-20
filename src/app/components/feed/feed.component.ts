@@ -86,14 +86,21 @@ export class FeedComponent implements OnInit {
 
     document.addEventListener("DOMContentLoaded", () => {
       let elems = document.querySelectorAll(".carousel");
-      let instances = M.Carousel.init(elems, { fullWidth: false, indicators: true, padding: 60 });
+      let instances = M.Carousel.init(elems, {
+        fullWidth: false,
+        indicators: true,
+        padding: 60
+      });
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      let elems = document.querySelectorAll('.parallax');
+    document.addEventListener("DOMContentLoaded", () => {
+      let elems = document.querySelectorAll(".parallax");
       let instances = M.Parallax.init(elems, {});
     });
 
-
+    document.addEventListener("DOMContentLoaded", function() {
+      let elems = document.querySelectorAll(".slider");
+      let instances = M.Slider.init(elems, {});
+    });
   }
 }
