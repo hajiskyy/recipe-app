@@ -13,11 +13,8 @@ const routes: Routes = [
   { path:'', component:FeedComponent  },
   { path:'login', component:LoginFormComponent  },
   { path:'register', component:RegisterFormComponent  },
-  { path:'recepies', component: RecepiesComponent,
-    children:[
-       { path: ':id', component: RecepieDetailComponent }
-     ]  
-  },
+  { path:'recepies', component: RecepiesComponent},
+  { path: 'recepies/:id', component: RecepieDetailComponent },
   { path:'recepiess', redirectTo:'recepies', pathMatch: 'full' },
   { path:'**', component: PageNotFoundComponent }
 

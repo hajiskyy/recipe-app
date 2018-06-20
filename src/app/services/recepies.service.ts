@@ -5,7 +5,7 @@ import {
   AngularFirestoreDocument
 } from "angularfire2/firestore";
 import { Observable, Subject } from "rxjs";
-import { map } from 'rxjs/operators';
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -21,14 +21,21 @@ export class RecepiesService {
   }
 
   getRecepies(): Observable<any[]> {
-    this.recepies = this.recepieCollections.snapshotChanges().pipe(map(changes => {
-      return changes.map(actions => {
-        const data = actions.payload.doc.data() as any;
-        data.id = actions.payload.doc.id;
-        return data;
-      });
-    }));
-
+    this.recepies = this.recepieCollections.snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(actions => {
+          const data = actions.payload.doc.data() as any;
+          data.id = actions.payload.doc.id;
+          return data;
+        });
+      })
+    );
     return this.recepies;
+  }
+
+  getSingleRecepie(id: string): Observable<any>{
+    this.recepieDoc = this.afs.doc(`recepies/${id}`)
+    this.recepie = this.recepieDoc.valueChanges();
+    return this.recepie;
   }
 }
