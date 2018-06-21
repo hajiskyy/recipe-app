@@ -12,6 +12,7 @@ import { map } from "rxjs/operators";
 })
 export class RecepiesService {
   recepieCollections: AngularFirestoreCollection<any>;
+  feedRecepieCollections: AngularFirestoreCollection<any>;
   recepieDoc: AngularFirestoreDocument<any>;
   recepies: Observable<any[]>;
   recepie: Observable<any>;
@@ -32,9 +33,22 @@ export class RecepiesService {
     );
     return this.recepies;
   }
+  getFeedRecepies(): Observable<any[]> {
+    this.feedRecepieCollections = this.afs.collection("recepie", ref => ref.limit(3));
+    this.recepies = this.feedRecepieCollections.snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(actions => {
+          const data = actions.payload.doc.data() as any;
+          data.id = actions.payload.doc.id;
+          return data;
+        });
+      })
+    );
+    return this.recepies;
+  }
 
-  getSingleRecepie(id: string): Observable<any>{
-    this.recepieDoc = this.afs.doc(`recepies/${id}`)
+  getSingleRecepie(id: string): Observable<any> {
+    this.recepieDoc = this.afs.doc(`recepie/${id}`);
     this.recepie = this.recepieDoc.valueChanges();
     return this.recepie;
   }
