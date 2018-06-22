@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { RecepiesService } from "../../services/recepies.service";
+import { StepsService } from "../../services/steps.service";
 import { of } from 'rxjs';
 
 
@@ -12,10 +13,13 @@ import { of } from 'rxjs';
 })
 export class RecepieDetailComponent implements OnInit {
   recepie: any;
+  steps$: any[]
+  ingredients: any[];
   constructor(
     private active: ActivatedRoute,
     private router: Router,
-    private recepieService: RecepiesService
+    private recepieService: RecepiesService,
+    private stepsService: StepsService
   ) {}
 
   ngOnInit() {
@@ -23,6 +27,11 @@ export class RecepieDetailComponent implements OnInit {
     this.recepieService.getSingleRecepie(id).subscribe(data => {
       // console.log(data);
       this.recepie = of(data);
+      this.ingredients = data.ingredients;
     });
+
+    this.stepsService.getSteps(id).subscribe(data => {
+      this.steps$ = data[0].steps;
+    })
   }
 }

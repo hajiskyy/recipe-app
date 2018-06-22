@@ -6,6 +6,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from "../environments/environment";
 import { RecepiesService } from "./services/recepies.service";
+import { StepsService } from "./services/steps.service";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,7 +44,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AngularFirestoreModule
   ],
   providers: [
-    RecepiesService
+    RecepiesService,
+    StepsService
   ],
   bootstrap: [AppComponent]
 })
