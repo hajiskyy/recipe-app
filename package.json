@@ -23,8 +23,12 @@
     "angularfire2": "^5.0.0-rc.10",
     "core-js": "^2.5.4",
     "firebase": "^5.0.4",
+    "firebase-admin": "~5.4.1",
+    "firebase-functions": "^0.7.1",
+    "font-awesome": "^4.7.0",
     "material-icons": "^0.2.3",
     "materialize-css": "^1.0.0-rc.1",
+    "npm": "^6.1.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

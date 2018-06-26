@@ -8,9 +8,28 @@
       <p class="flow-text">{{(recepie | async)?.description}}</p>
       <p>difficulty: {{(recepie | async)?.difficulty}}</p>
       <p>time: {{(recepie | async)?.time}}</p>
-      <p>
-        rating: {{(recepie | async)?.rating}}
-      </p>
+      average rating:
+      <div class="chip">{{(recepie | async)?.averageRating}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <div class="container">
+        <h4>Post your Review</h4>
+
+        <fieldset class="rating">
+          <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
+            <!-- full star -->
+            <input (click)="ratingHandler(num)" [id]="'star'+num" [value]="num-0.5" name="rating" type="radio" />
+
+            <label class="full" [for]="'star'+num"></label>
+
+            <!-- half star -->
+            <input (click)="ratingHandler(num-0.5)" [value]="num-0.5" [id]="'halfstar'+num" name="rating" type="radio" />
+            <label class="half" [for]="'halfstar'+num"></label>
+          </ng-container>
+        </fieldset>
+      </div>
     </div>
   </div>
   <div class="row">

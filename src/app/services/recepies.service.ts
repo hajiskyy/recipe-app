@@ -14,6 +14,9 @@ export class RecepiesService {
   recepieCollections: AngularFirestoreCollection<any>;
   feedRecepieCollections: AngularFirestoreCollection<any>;
   recepieDoc: AngularFirestoreDocument<any>;
+  RatingsRef: AngularFirestoreCollection<any>
+
+  ratings: Observable<any>
   recepies: Observable<any[]>;
   recepie: Observable<any>;
 
@@ -52,4 +55,18 @@ export class RecepiesService {
     this.recepie = this.recepieDoc.valueChanges();
     return this.recepie;
   }
+
+  addRating(recepieId: string, userId: string, rating: number){
+    
+    let newRating: Rating = {userId: userId, rating: rating};
+    let ratingPath =`recepie/${recepieId}/ratings/${recepieId}_${newRating.userId}`;
+
+    this.afs.doc(ratingPath).set(newRating);
+  }
+}
+
+
+interface Rating{
+  userId: string,
+  rating: number
 }

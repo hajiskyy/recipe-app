@@ -1,14 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AppRoutingModule } from './app-routing.module';
+
+
 import { environment } from "../environments/environment";
+
 import { RecepiesService } from "./services/recepies.service";
 import { StepsService } from "./services/steps.service";
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { RecepiesComponent } from './components/recepies/recepies.component';
@@ -45,7 +50,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   ],
   providers: [
     RecepiesService,
-    StepsService
+    StepsService,
   ],
   bootstrap: [AppComponent]
 })
