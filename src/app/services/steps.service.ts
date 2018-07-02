@@ -23,4 +23,7 @@ export class StepsService {
     this.steps$ = this.stepCollection.valueChanges();
     return this.steps$;
   }
+  setSteps(steps: any){
+    this.afs.collection('steps').add(steps);
+  }
 }

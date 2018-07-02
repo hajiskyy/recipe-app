@@ -28,6 +28,7 @@ import { EditRecepieFormComponent } from './components/edit-recepie-form/edit-re
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddStepsComponent } from './components/add-steps/add-steps.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     EditRecepieFormComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddStepsComponent
   ],
   imports: [
     BrowserModule,

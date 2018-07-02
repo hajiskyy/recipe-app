@@ -4,8 +4,13 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from "angularfire2/firestore";
+
+import {
+  AngularFireStorage,
+  AngularFireUploadTask
+} from "angularfire2/storage";
 import { Observable, Subject } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, finalize } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -14,13 +19,19 @@ export class RecepiesService {
   recepieCollections: AngularFirestoreCollection<any>;
   feedRecepieCollections: AngularFirestoreCollection<any>;
   recepieDoc: AngularFirestoreDocument<any>;
-  RatingsRef: AngularFirestoreCollection<any>
+  RatingsRef: AngularFirestoreCollection<any>;
 
-  ratings: Observable<any>
+  task: AngularFireUploadTask;
+  url: Observable<any>
+  ratings: Observable<any>;
+  upload: Observable<any>;
   recepies: Observable<any[]>;
   recepie: Observable<any>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore,
+    private afStore: AngularFireStorage
+  ) {
     this.recepieCollections = this.afs.collection("recepie");
   }
 
@@ -37,7 +48,9 @@ export class RecepiesService {
     return this.recepies;
   }
   getFeedRecepies(): Observable<any[]> {
-    this.feedRecepieCollections = this.afs.collection("recepie", ref => ref.limit(3));
+    this.feedRecepieCollections = this.afs.collection("recepie", ref =>
+      ref.limit(3)
+    );
     this.recepies = this.feedRecepieCollections.snapshotChanges().pipe(
       map(changes => {
         return changes.map(actions => {
@@ -56,17 +69,24 @@ export class RecepiesService {
     return this.recepie;
   }
 
-  addRating(recepieId: string, userId: string, rating: number){
-    
-    let newRating: Rating = {userId: userId, rating: rating};
-    let ratingPath =`recepie/${recepieId}/ratings/${recepieId}_${newRating.userId}`;
+  setRecepie(id: string, recepie: any) {
+    this.afs.doc(`recepie/${id}`).set(recepie);
+  }
+
+  addRating(recepieId: string, userId: string, rating: number) {
+    let newRating: Rating = { userId: userId, rating: rating };
+    let ratingPath = `recepie/${recepieId}/ratings/${recepieId}_${
+      newRating.userId
+    }`;
 
     this.afs.doc(ratingPath).set(newRating);
   }
+
+  uploadImage(file: File, path: string) {
+    this.task = this.afStore.upload(path, file);
+  }
 }
-
-
-interface Rating{
-  userId: string,
-  rating: number
+interface Rating {
+  userId: string;
+  rating: number;
 }

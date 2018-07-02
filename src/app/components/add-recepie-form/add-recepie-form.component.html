@@ -7,15 +7,15 @@
           <h6 class="form-title">Let's Begin</h6>
           <div class="row">
             <div class="input-field col s12">
-              <input placeholder="What would you like to name it?" id="name" name="name" type="text" class="validate">
+              <input placeholder="What would you like to name it?" id="name" [(ngModel)]="name" name="name" type="text" class="validate">
               <label for="name">Recepie Name</label>
             </div>
             <div class="input-field col s12">
-              <input placeholder="Tell us more about it" id="description" name="description" type="text" class="validate">
+              <input placeholder="Tell us more about it" id="description" [(ngModel)]="description" name="description" type="text" class="validate">
               <label for="description">description</label>
             </div>
             <div class="input-field col s12">
-              <select name="difficulty" id="difficulty">
+              <select name="difficulty" (change)="difficultyChange($event)" id="difficulty">
                 <option value="easy" selected>Easy</option>
                 <option value="normal">Normal</option>
                 <option value="hard">Hard</option>
@@ -31,7 +31,7 @@
                   <label for="timeDigit">Time</label>
                 </div>
                 <div class="input-field col s6">
-                  <select name="timeString" id="timeString">
+                  <select name="timeString" (change)="timeChange($event)" id="timeString">
                     <option value="minutes">min</option>
                     <option value="hours"> hour</option>
                   </select>
@@ -47,7 +47,6 @@
                   <i class="material-icons icon-remove">remove_circle</i>
                 </a>
               </div>
-
             </div>
             <div class="center-align col s12">
               <a href="#" (click)="addIngredientForm($event)" (mouseover)="addHover($event)">
@@ -66,7 +65,7 @@
             <div class="file-field input-field">
               <div class="btn grey darken-3">
                 <span>Image</span>
-                <input type="file">
+                <input type="file" (change)="fileChange($event)" accept=".png,.jpg">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -74,18 +73,32 @@
             </div>
             <div class="input-field col s12">
               <h6>Do you want to add steps right now?</h6>
-              <a href="#" class="btn green waves-effect">Yes</a>
-              <a href="#" class="btn red waves-effect">No</a>
+              <a class="btn green waves-effect" *ngIf="!addSteps" (click)="addSteps = !addSteps">Yes</a>
+              <a href="#" *ngIf="addSteps" class="btn red waves-effect" (click)="addSteps = !addSteps">cancel</a>
+            </div>
+            <div *ngIf="addSteps">
+              <h6 class="center-align"> What are the steps?</h6>
+              <div *ngFor="let item of stepFormControl; let i = index">
+                <div class="input-field col s12">
+                  <input type="text" name="item" id="item" max="255" (change)="newStep($event, i)">
+                  
+                  <a href="#" (click)="minusStepForm($event, i)" (mouseover)="minusHover($event)">
+                    <i class="material-icons icon-remove">remove_circle</i>
+                  </a>
+                </div>
+              </div>
+              <div class="center-align col s12">
+                <a href="#" (click)="addStepForm($event)" (mouseover)="addHover($event)">
+                  <i class="material-icons icon-add">add_circle_outline</i>
+                </a>
+              </div>
             </div>
             <div class="input-field col s12 center-align">
-              <a href="#" class="btn  green waves-effect waves-light white-text" (click)="onSubmit()">Submit</a>
+              <a href="#" class="btn  green waves-effect waves-light white-text" (click)="onSubmit($event)">Submit</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
