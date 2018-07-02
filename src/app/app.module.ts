@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -25,6 +27,7 @@ import { AddRecepieFormComponent } from './components/add-recepie-form/add-recep
 import { EditRecepieFormComponent } from './components/edit-recepie-form/edit-recepie-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +41,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AddRecepieFormComponent,
     EditRecepieFormComponent,
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
