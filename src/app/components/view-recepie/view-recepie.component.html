@@ -1,0 +1,56 @@
+<div class="container">
+    <a routerLink="/dashboard" class="btn grey"><i class="material-icons left">arrow_back</i>dashboard</a>
+
+  <h3>Details</h3>
+  
+  <div class="row">
+    <a routerLink='/dashboard/edit/{{this.recepieId}}' class="btn green right-align">Edit</a>
+    <a href="#" class="btn red right-align" (click)="delete($event)">Delete</a>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="{{(recepie | async)?.imageUrl}}" style="max-height: 500px; max-width: 500px">
+    </div>
+    <div class="col">
+      <p>name:
+        <strong>{{(recepie | async)?.name}}</strong>
+      </p>
+      <div class="divider"></div>
+      <p>description:
+        <strong>{{(recepie | async)?.description}}</strong>
+      </p>
+      <div class="divider"></div>
+      <p>rating:
+        <strong>{{(recepie | async)?.averageRating ? (recepie | async)?.averageRating: "Not rated yet" }}</strong>
+      </p>
+      <div class="divider"></div>
+      <p>difficulty:
+        <strong>{{(recepie | async)?.difficulty}}</strong>
+      </p>
+      <div class="divider"></div>
+      <p>time:
+        <strong>{{(recepie | async)?.time}}</strong>
+      </p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="row">
+    <div class="col s6">
+      <h6>ingredients</h6>
+      <ul *ngFor="let item of ingredients">
+        <div class="divider"></div>
+        <li>{{item}}</li>
+      </ul>
+      <div class="divider"></div>
+    </div>
+    <div class="col s6">
+      <h6>steps</h6>
+      <ul *ngFor=" let item of steps$">
+        <div class="divider"></div>
+        <li>{{item}}</li>
+      </ul>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+</div>

@@ -37,12 +37,12 @@
 </div>
 
 <div class="section">
-  <div class="container">
-    <h4 class="center-align">Highest rated</h4>
-    <div class="row">
+  <div class="row ">
+    <div class="container">
+      <h4 class="center-align">Highest rated</h4>
       <ul *ngFor="let item of recepies">
-        <li>
-          <div class="col l4 m6 s12">
+        <div class="col s12 m6 l4">
+          <li>
             <div class="card">
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{item.imageUrl}}">
@@ -52,10 +52,10 @@
                   <i class="material-icons right">more_vert</i>
                 </span>
                 <p>
-                  <strong>rating: </strong>4.6</p>
+                  <strong>rating: </strong>{{ item.averageRating ? item.averageRating : "Not rated" }}</p>
               </div>
               <div class="card-action">
-                <a href="#">See more</a>
+                <a [routerLink]="['/recepies',item.id]">See more</a>
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">description
@@ -68,8 +68,8 @@
                   <strong>Time needed: </strong> {{item.time}}</p>
               </div>
             </div>
-          </div>
-        </li>
+          </li>
+        </div>
       </ul>
     </div>
   </div>

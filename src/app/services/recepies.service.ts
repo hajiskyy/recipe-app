@@ -18,11 +18,12 @@ import { map, finalize } from "rxjs/operators";
 export class RecepiesService {
   recepieCollections: AngularFirestoreCollection<any>;
   feedRecepieCollections: AngularFirestoreCollection<any>;
+  dashBoardCollections: AngularFirestoreCollection<any>;
   recepieDoc: AngularFirestoreDocument<any>;
   RatingsRef: AngularFirestoreCollection<any>;
 
   task: AngularFireUploadTask;
-  url: Observable<any>
+  url: Observable<any>;
   ratings: Observable<any>;
   upload: Observable<any>;
   recepies: Observable<any[]>;
@@ -47,9 +48,24 @@ export class RecepiesService {
     );
     return this.recepies;
   }
+  getDashboardRecepies(userId: string): Observable<any[]> {
+    this.dashBoardCollections = this.afs.collection("recepie", ref =>
+      ref.where("userId","==",userId) //TODO-UID
+    );
+    this.recepies = this.recepieCollections.snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(actions => {
+          const data = actions.payload.doc.data() as any;
+          data.id = actions.payload.doc.id;
+          return data;
+        });
+      })
+    );
+    return this.recepies;
+  }
   getFeedRecepies(): Observable<any[]> {
     this.feedRecepieCollections = this.afs.collection("recepie", ref =>
-      ref.limit(3)
+      ref.orderBy("averageRating", "desc").limit(3)
     );
     this.recepies = this.feedRecepieCollections.snapshotChanges().pipe(
       map(changes => {
@@ -72,6 +88,10 @@ export class RecepiesService {
   setRecepie(id: string, recepie: any) {
     this.afs.doc(`recepie/${id}`).set(recepie);
   }
+  
+  deleteRecepie(id: string){
+    return this.afs.doc(`recepie/${id}`).delete()
+  }
 
   addRating(recepieId: string, userId: string, rating: number) {
     let newRating: Rating = { userId: userId, rating: rating };
@@ -84,7 +104,11 @@ export class RecepiesService {
 
   uploadImage(file: File, path: string) {
     this.task = this.afStore.upload(path, file);
+
+    // console.log(this.task.task.snapshot.downloadURL);
+    return this.task.task.snapshot.ref.getDownloadURL();
   }
+
 }
 interface Rating {
   userId: string;

@@ -29,6 +29,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddStepsComponent } from './components/add-steps/add-steps.component';
+import { ViewRecepieComponent } from './components/view-recepie/view-recepie.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AddStepsComponent } from './components/add-steps/add-steps.component';
     NavbarComponent,
     PageNotFoundComponent,
     DashboardComponent,
-    AddStepsComponent
+    AddStepsComponent,
+    ViewRecepieComponent
   ],
   imports: [
     BrowserModule,

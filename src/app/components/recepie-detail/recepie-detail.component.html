@@ -9,7 +9,8 @@
       <p>difficulty: {{(recepie | async)?.difficulty}}</p>
       <p>time: {{(recepie | async)?.time}}</p>
       average rating:
-      <div class="chip">{{(recepie | async)?.averageRating}}</div>
+      <div class="chip">{{(recepie | async)?.averageRating ? (recepie | async)?.averageRating : "Not rated" }}</div>
+      <!-- {{ item.averageRating ? item.averageRating : "Not rated" }} -->
     </div>
   </div>
   <div class="row">

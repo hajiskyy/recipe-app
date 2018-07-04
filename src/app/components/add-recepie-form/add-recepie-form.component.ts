@@ -5,6 +5,7 @@ import { AngularFireStorage } from "angularfire2/storage";
 import { map } from "rxjs/operators";
 import { RecepiesService } from "../../services/recepies.service";
 import { StepsService } from "../../services/steps.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-add-recepie-form",
@@ -27,8 +28,10 @@ export class AddRecepieFormComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
+    private afStorage: AngularFireStorage,
     private stepsServe: StepsService,
-    private recepieServe: RecepiesService
+    private recepieServe: RecepiesService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -62,12 +65,16 @@ export class AddRecepieFormComponent implements OnInit {
 
   addIngredientForm(e: any) {
     e.preventDefault();
-    this.ingFormControl.push(this.ingFormControl[this.ingFormControl.length] + 1);
+    this.ingFormControl.push(
+      this.ingFormControl[this.ingFormControl.length] + 1
+    );
   }
 
   addStepForm(e: any) {
     e.preventDefault();
-    this.stepFormControl.push(this.stepFormControl[this.stepFormControl.length] + 1);
+    this.stepFormControl.push(
+      this.stepFormControl[this.stepFormControl.length] + 1
+    );
   }
 
   minusIngredientForm(e: any, i) {
@@ -91,7 +98,6 @@ export class AddRecepieFormComponent implements OnInit {
   }
 
   newStep(e, i) {
-
     this.steps[i] = e.target.value;
   }
 
@@ -130,58 +136,65 @@ export class AddRecepieFormComponent implements OnInit {
     interface Recepie {
       name: String;
       description: String;
-      difficult: String;
+      difficulty: String;
       ingredients: String[];
       time: String;
-      imageUrl: string
+      imageUrl?: any;
+      imagePath?: any;
+      userId: string;
     }
-    interface Steps{
-      recepieId: string,
-      steps: string[]
+    interface Steps {
+      recepieId: string;
+      steps: string[];
     }
 
     //set image storage path
-    let storagePath = `images/${this.name}_${this.image.name}`;
+    let storagePath = `images/${this.image.name}_OD45ZJRBa1flzhWj49myqvzL7oh2`; //TODO- UID
 
     let Recepie: Recepie = {
       name: this.name,
       description: this.description,
-      difficult: this.difficulty,
+      difficulty: this.difficulty,
       ingredients: this.ingredients,
       time: this.timeDigit + " " + this.timeString,
-      imageUrl: storagePath
+      userId: "OD45ZJRBa1flzhWj49myqvzL7oh2",
+      imagePath: storagePath
     };
 
     if (
       Recepie.name &&
       Recepie.description &&
-      Recepie.difficult &&
+      Recepie.difficulty &&
       Recepie.ingredients &&
       Recepie.time
     ) {
-      // Upload image
-      this.recepieServe.uploadImage(this.image, storagePath);
-      //create Id
-      let id = this.afs.createId();
-      this.recepieServe.setRecepie(id, Recepie);
+      if (this.image) {
 
-      if(this.addSteps){
-        let steps: Steps = {
-          recepieId: id,
-          steps: this.steps
+        //create Id
+        let id = this.afs.createId();
+
+        if (this.addSteps) {
+          let steps: Steps = {
+            recepieId: id,
+            steps: this.steps
+          };
+          //upload steps
+          this.stepsServe.setSteps(steps);
         }
-        //upload steps
-        this.stepsServe.setSteps(steps);
+        // Upload image
+        this.recepieServe.uploadImage(this.image, storagePath).then(res => {
+          Recepie.imageUrl = res;
+          this.recepieServe.setRecepie(id, Recepie);
+          M.toast({ html: "recepie added" });
+          this.router.navigate(["/dashboard"]);
+        });
+
+      } else {
+        M.toast({ html: "select an image to upload" });
       }
-      //set steps
-      
-
-
-      console.log("added");
-      
     } else {
       //TODO ERROR MESSAGE
-      console.log("false");
+      M.toast({ html: "fill out all fields" });
     }
   }
 }

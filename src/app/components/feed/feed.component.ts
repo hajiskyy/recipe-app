@@ -14,7 +14,7 @@ export class FeedComponent implements OnInit {
   constructor(private rcpService: RecepiesService) {}
 
   ngOnInit() {
-    this.rcpService.getRecepies().subscribe(data => {
+    this.rcpService.getFeedRecepies().subscribe(data => {
       this.recepies = data;
       this.DOMs();
     });
