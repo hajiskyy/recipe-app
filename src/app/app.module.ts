@@ -30,6 +30,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddStepsComponent } from './components/add-steps/add-steps.component';
 import { ViewRecepieComponent } from './components/view-recepie/view-recepie.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ViewRecepieComponent } from './components/view-recepie/view-recepie.com
     PageNotFoundComponent,
     DashboardComponent,
     AddStepsComponent,
-    ViewRecepieComponent
+    ViewRecepieComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ import { ViewRecepieComponent } from "./components/view-recepie/view-recepie.com
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { RegisterFormComponent } from "./components/register-form/register-form.component";
+import { AccountDetailComponent } from "./components/account-detail/account-detail.component";
+import { SettingsComponent } from "./components/settings/settings.component";
 import { AddStepsComponent } from './components/add-steps/add-steps.component';
 
 
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path:'register', component:RegisterFormComponent  },
   { path:'recepies', component: RecepiesComponent},
   { path: 'recepies/:id', component: RecepieDetailComponent },
+  { path: 'profile', component: AccountDetailComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dashboard/add', component: AddRecepieFormComponent},
   { path: 'dashboard/edit/:id', component: EditRecepieFormComponent },
