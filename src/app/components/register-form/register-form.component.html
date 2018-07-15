@@ -1,3 +1,47 @@
-<p>
-  register-form works!
-</p>
+<section>
+  <div class="container">
+    <div class="row card">
+      <div class="col s12">
+        <h4 class="center-align">Become an author</h4>
+        <form (submit)="onSubmit()">
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" name="name" id="name" [(ngModel)]="name" maxlength="100" minlength="2">
+              <label for="name">Full name</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="email" name="email" id="email" [(ngModel)]="email">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="password" name="password" id="password" [(ngModel)]="password" maxlength="12" minlength="2">
+              <label for="password">Password</label>
+            </div>
+            <div class="input-field col s12">
+              <input type="password" name="cpassword" id="cpassword" [(ngModel)]="cpassword" maxlength="12" minlength="2"(change)="check($event)" >
+              <label for="cpassword">Confirm Password</label>
+            </div>
+          </div>
+          <div class="input-field col s12">
+            <input type="submit" value="Register" class="btn green">
+          </div>
+          <div class="center-align" *ngIf="loading">
+            <div class="preloader-wrapper small active">
+              <div class="spinner-layer spinner-green-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

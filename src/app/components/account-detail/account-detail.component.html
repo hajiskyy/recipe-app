@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col s12">
             <!-- image -->
-            <img src="assets/img/a.jpg" alt="" class="responsive-img circle">
+            <img src="{{(author | async)?.imageUrl ? (author | async)?.imageUrl : defaultImage}}" alt="" class="responsive-img circle">
           </div>
           <div class="col s12">
             <a href="#" (click)="changePhoto($event)">
@@ -16,13 +16,13 @@
         <div class="divider"></div>
         <div class="row">
           <!-- name -->
-          <h4 class="flow-text">Haji Mohammed</h4>
+          <h4 class="flow-text">{{(author |async )?.name}}</h4>
         </div>
         <div class="divider"></div>
         <div class="row">
           <div class="col s12">
             <h4>Contact</h4>
-            <h6>Email: stuff@stuff.com</h6>
+            <h6>{{(author | async )?.email}}</h6>
           </div>
         </div>
         <div class="divider"></div>

@@ -18,7 +18,7 @@ export class StepsService {
   }
 
   getSteps(id: string){
-    // this.stepDocuments = this.afs.doc(`steps/${id}`);
+   
     this.stepCollection = this.afs.collection('steps', ref => ref.where("recepieId", "==",`${id}`).limit(1));
     this.steps$ = this.stepCollection.valueChanges();
     return this.steps$;

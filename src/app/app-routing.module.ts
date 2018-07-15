@@ -14,6 +14,8 @@ import { AccountDetailComponent } from "./components/account-detail/account-deta
 import { SettingsComponent } from "./components/settings/settings.component";
 import { AddStepsComponent } from './components/add-steps/add-steps.component';
 
+import { AuthGuard } from "./auth.guard";
+
 
 
 const routes: Routes = [
@@ -22,12 +24,12 @@ const routes: Routes = [
   { path:'register', component:RegisterFormComponent  },
   { path:'recepies', component: RecepiesComponent},
   { path: 'recepies/:id', component: RecepieDetailComponent },
-  { path: 'profile', component: AccountDetailComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'dashboard/add', component: AddRecepieFormComponent},
-  { path: 'dashboard/edit/:id', component: EditRecepieFormComponent },
-  { path: 'dashboard/view/:id', component: ViewRecepieComponent},
+  { path: 'profile', component: AccountDetailComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard] },
+  { path: 'dashboard/add', component: AddRecepieFormComponent, canActivate:[AuthGuard]},
+  { path: 'dashboard/edit/:id', component: EditRecepieFormComponent, canActivate:[AuthGuard] },
+  { path: 'dashboard/view/:id', component: ViewRecepieComponent, canActivate:[AuthGuard]},
   { path:'', redirectTo:'feed', pathMatch: 'full' },
   { path:'**', component: PageNotFoundComponent }
 

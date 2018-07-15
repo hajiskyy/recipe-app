@@ -12,32 +12,35 @@
         <li>
           <a routerLink='/recepies'>recepies</a>
         </li>
-        <li>
+        <li *ngIf="this.auth.authenticated">
           <!-- <div class="user-view"> -->
-            John Doe
+          John Doe
           <!-- </div> -->
         </li>
-        <li>
+        <li *ngIf="this.auth.authenticated">
           <a routerLink="/profile" class="sidenav-close">
             view profile</a>
         </li>
-        <li>
+        <li *ngIf="this.auth.authenticated">
           <a routerLink="/settings" class="sidenav-close">
             settings
           </a>
         </li>
-        <li>
+        <li *ngIf="!this.auth.authenticated">
           <a routerLink='/login'>login</a>
         </li>
-        <li>
+        <li *ngIf="!this.auth.authenticated">
           <a routerLink='/register'>Register</a>
+        </li>
+        <li *ngIf="this.auth.authenticated">
+          <a href="#" (click)="signOut($event)">Log out</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 <ul id="slide-out" class="sidenav">
-  <li>
+  <li *ngIf="this.auth.authenticated">
     <div class="user-view">
       <div class="background">
         <img src="assets/img/sideNavBg.jpg">
@@ -49,12 +52,12 @@
       <span class="white-text email">jdandturk@gmail.com</span>
     </div>
   </li>
-  <li>
-    <a href="/profile" class="sidenav-close">
+  <li *ngIf="this.auth.authenticated">
+    <a routerLink="/profile" class="sidenav-close">
       <i class="material-icons">account_circle</i>view profile</a>
   </li>
-  <li>
-    <a href="/settings" class="sidenav-close">
+  <li *ngIf="this.auth.authenticated">
+    <a routerLink="/settings" class="sidenav-close">
       <i class="material-icons">settings</i>settings
     </a>
   </li>
@@ -69,12 +72,17 @@
     <a routerLink='/recepies' class="sidenav-close">
       <i class="material-icons">local_dining</i> recepies</a>
   </li>
-  <li>
+  <li *ngIf="!this.auth.authenticated">
     <a routerLink='/login' class="sidenav-close">
       <i class="material-icons">person</i>login</a>
   </li>
-  <li>
+  <li *ngIf="!this.auth.authenticated">
     <a routerLink='/register' class="sidenav-close">
       <i class="material-icons">person_add</i>Register</a>
+  </li>
+  <li *ngIf="this.auth.authenticated">
+    <a href="#" (click)="signOut($event)">
+        <i class="material-icons">person_outline</i>log out
+    </a>
   </li>
 </ul>

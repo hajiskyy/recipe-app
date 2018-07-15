@@ -1,3 +1,59 @@
-<p>
-  login-form works!
-</p>
+<div class="container">
+  <section>
+    <div class="row">
+      <div class="col card">
+        <div class="row">
+          <form (submit)="onSubmit($event)">
+            <h3 class="center-align">Login</h3>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">mail</i>
+              <input type="email" name="email" id="email" [(ngModel)]="email">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">lock</i>
+              <input type="password"  name="password" id="password" [(ngModel)]="password">
+              <label for="password">Password</label>
+            </div>
+            <div class="form-input col s3">
+              <input type="submit" value="Login" class="btn grey darken-3">
+            </div>
+            <h6 class="left-align col s2">Or</h6>
+            <div class="form-input col s6">
+              <a href="#" (click)="GooLogin($event)" class="btn white blue-text">
+                <i class="fa fa-google left"></i>
+                Google
+              </a>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col">
+            <a href="#" (click)="resetPassword($event)">Forgot Password?</a>
+          </div>
+          <div class="col s12">
+            Don't have an account?
+            <a href="#" (click)="register($event)"> Register</a>
+          </div>
+          <div class="col s12">
+            <div class=" center-align" *ngIf="loading">
+              <div class="preloader-wrapper small active">
+                <div class="spinner-layer spinner-green-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
