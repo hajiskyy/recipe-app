@@ -5,16 +5,16 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyB30cujbHt9rbrrgd8X8GK1VCD5PnM-2Pk",
+    apiKey: "********************",
     authDomain: "recepie-app.firebaseapp.com",
-    databaseURL: "https://recepie-app.firebaseio.com",
+    databaseURL: "+++++++++++++++++++++",
     projectId: "recepie-app",
-    storageBucket: "recepie-app.appspot.com",
-    messagingSenderId: "770766576838"
+    storageBucket: "_________________",
+    messagingSenderId: "++++++++++++++++"
   },
   algolia: {
-    appId: 'QT4B02BTEF',
-    apiKey: '9cd2d85e348b48511dfdabcf211d01dd'
+    appId: '=================',
+    apiKey: '++++++++++++++++++++'
   }
 };
 
