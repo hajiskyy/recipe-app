@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecepiesService } from "../../services/recepies.service";
+import { AuthService } from "../../services/auth.service";
 import { of } from "rxjs";
 
 @Component({
@@ -10,12 +11,15 @@ import { of } from "rxjs";
 export class DashboardComponent implements OnInit {
 
   recepie: any
-  constructor(private RecepieServe: RecepiesService) { }
+  constructor(
+    private RecepieServe: RecepiesService,
+    private auth: AuthService
+  
+  ) { }
 
   ngOnInit() {
-    this.RecepieServe.getDashboardRecepies("OD45ZJRBa1flzhWj49myqvzL7oh2").subscribe(data => {
+    this.RecepieServe.getDashboardRecepies(this.auth.currentUserId).subscribe(data => {
       this.recepie = of(data);
-      console.log(this.recepie);
     });
   }
 

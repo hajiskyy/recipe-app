@@ -12,14 +12,11 @@ import { of } from "rxjs";
 export class AccountDetailComponent implements OnInit {
   author: any
   id: any
-  defaultImage: string = "assets/img/a.jpg";
   constructor(private user: UserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.id = this.auth.currentUserId;
-    console.log(this.id);
     this.user.getAuthor(this.id).subscribe(author => {
-      console.log(author);
       this.author = of(author[0]);
     })
 

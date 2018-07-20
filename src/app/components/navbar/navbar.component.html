@@ -10,27 +10,25 @@
           <a routerLink='/'>Home</a>
         </li>
         <li>
-          <a routerLink='/recepies'>recepies</a>
-        </li>
-        <li *ngIf="this.auth.authenticated">
-          <!-- <div class="user-view"> -->
-          John Doe
-          <!-- </div> -->
-        </li>
-        <li *ngIf="this.auth.authenticated">
-          <a routerLink="/profile" class="sidenav-close">
-            view profile</a>
+          <a routerLink='/recepies'>Recipes</a>
         </li>
         <li *ngIf="this.auth.authenticated">
           <a routerLink="/settings" class="sidenav-close">
-            settings
+            Settings
           </a>
         </li>
+        <li *ngIf="this.auth.authenticated">
+          <a routerLink="/dashboard" class="sidenav-close">Dashboard</a>
+        </li>
         <li *ngIf="!this.auth.authenticated">
-          <a routerLink='/login'>login</a>
+          <a routerLink='/login'>Login</a>
         </li>
         <li *ngIf="!this.auth.authenticated">
           <a routerLink='/register'>Register</a>
+        </li>
+        <li *ngIf="this.auth.authenticated">
+          <a routerLink="/profile" class="sidenav-close">
+            {{this.auth.currentUserEmail}}</a>
         </li>
         <li *ngIf="this.auth.authenticated">
           <a href="#" (click)="signOut($event)">Log out</a>
@@ -45,11 +43,7 @@
       <div class="background">
         <img src="assets/img/sideNavBg.jpg">
       </div>
-      <a routerLink="/profile" class="sidenav-close">
-        <img class="circle" src="assets/img/a.jpg">
-      </a>
-      <span class="white-text name">John Doe</span>
-      <span class="white-text email">jdandturk@gmail.com</span>
+      <span class="white-text email">{{this.auth.currentUserEmail}}</span>
     </div>
   </li>
   <li *ngIf="this.auth.authenticated">
@@ -59,6 +53,11 @@
   <li *ngIf="this.auth.authenticated">
     <a routerLink="/settings" class="sidenav-close">
       <i class="material-icons">settings</i>settings
+    </a>
+  </li>
+  <li *ngIf="this.auth.authenticated">
+    <a routerLink="/dashboard" class="sidenav-close">
+      <i class="material-icons">dashboard</i>dashboard
     </a>
   </li>
   <li>
@@ -82,7 +81,7 @@
   </li>
   <li *ngIf="this.auth.authenticated">
     <a href="#" (click)="signOut($event)">
-        <i class="material-icons">person_outline</i>log out
+      <i class="material-icons">person_outline</i>log out
     </a>
   </li>
 </ul>

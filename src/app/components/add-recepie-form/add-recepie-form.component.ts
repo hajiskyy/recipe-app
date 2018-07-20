@@ -2,10 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import * as M from "materialize-css/dist/js/materialize";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AngularFireStorage } from "angularfire2/storage";
-import { map } from "rxjs/operators";
+import { AuthService } from "../../services/auth.service";
 import { RecepiesService } from "../../services/recepies.service";
 import { StepsService } from "../../services/steps.service";
 import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-add-recepie-form",
@@ -28,7 +29,8 @@ export class AddRecepieFormComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    private afStorage: AngularFireStorage,
+    private http: HttpClient,
+    private auth: AuthService,
     private stepsServe: StepsService,
     private recepieServe: RecepiesService,
     private router: Router
@@ -80,7 +82,7 @@ export class AddRecepieFormComponent implements OnInit {
   minusIngredientForm(e: any, i) {
     e.preventDefault();
     if (this.ingFormControl.length === 1) {
-      // TODO ERROR MESSAGE
+      M.toast({ html: "Ingredients cannot be less that 1" });
     } else {
       this.ingFormControl.splice(i, 1);
       this.ingredients.splice(i, 1);
@@ -89,8 +91,12 @@ export class AddRecepieFormComponent implements OnInit {
 
   minusStepForm(e: any, i) {
     e.preventDefault();
-    this.stepFormControl.splice(i, 1);
-    this.steps.splice(i, 1);
+    if (this.stepFormControl.length === 1) {
+      M.toast({ html: "Steps cannot be less that 1" });
+    } else {
+      this.stepFormControl.splice(i, 1);
+      this.steps.splice(i, 1);
+    }
   }
 
   newIngredient(e, i) {
@@ -149,7 +155,7 @@ export class AddRecepieFormComponent implements OnInit {
     }
 
     //set image storage path
-    let storagePath = `images/${this.image.name}_OD45ZJRBa1flzhWj49myqvzL7oh2`; //TODO- UID
+    let storagePath = `images/${this.image.name}_${this.auth.currentUserId}`; //TODO- UID
 
     let Recepie: Recepie = {
       name: this.name,
@@ -157,7 +163,7 @@ export class AddRecepieFormComponent implements OnInit {
       difficulty: this.difficulty,
       ingredients: this.ingredients,
       time: this.timeDigit + " " + this.timeString,
-      userId: "OD45ZJRBa1flzhWj49myqvzL7oh2",
+      userId: this.auth.currentUserId,
       imagePath: storagePath
     };
 
@@ -169,7 +175,6 @@ export class AddRecepieFormComponent implements OnInit {
       Recepie.time
     ) {
       if (this.image) {
-
         //create Id
         let id = this.afs.createId();
 
@@ -188,12 +193,10 @@ export class AddRecepieFormComponent implements OnInit {
           M.toast({ html: "recepie added" });
           this.router.navigate(["/dashboard"]);
         });
-
       } else {
         M.toast({ html: "select an image to upload" });
       }
     } else {
-      //TODO ERROR MESSAGE
       M.toast({ html: "fill out all fields" });
     }
   }

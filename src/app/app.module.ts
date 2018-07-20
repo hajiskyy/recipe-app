@@ -1,7 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-
+import { NgAisModule } from "angular-instantsearch";
+import { HttpClientModule } from "@angular/common/http";
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireStorageModule } from "angularfire2/storage";
@@ -57,11 +58,13 @@ import { AuthGuard } from "./auth.guard";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgAisModule.forRoot()
   ],
   providers: [AuthService, RecepiesService, StepsService, UserService, AuthGuard],
   bootstrap: [AppComponent]

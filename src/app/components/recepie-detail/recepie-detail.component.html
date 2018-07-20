@@ -6,6 +6,11 @@
     <div class="col m5 s12">
       <h3>{{(recepie | async)?.name}}</h3>
       <p class="flow-text">{{(recepie | async)?.description}}</p>
+      <ul>
+        <li><h4>Author</h4></li>
+        <li>{{(recepie | async)?.author.name}}</li>
+        <li>{{(recepie | async)?.author.email}}</li>
+      </ul>
       <p>difficulty: {{(recepie | async)?.difficulty}}</p>
       <p>time: {{(recepie | async)?.time}}</p>
       average rating:

@@ -4,7 +4,6 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from "angularfire2/firestore";
-
 import {
   AngularFireStorage,
   AngularFireUploadTask
@@ -36,6 +35,7 @@ export class RecepiesService {
     this.recepieCollections = this.afs.collection("recepie");
   }
 
+  // get all recipes
   getRecepies(): Observable<any[]> {
     this.recepies = this.recepieCollections.snapshotChanges().pipe(
       map(changes => {
@@ -48,9 +48,11 @@ export class RecepiesService {
     );
     return this.recepies;
   }
+
+  // get a users recipe
   getDashboardRecepies(userId: string): Observable<any[]> {
     this.dashBoardCollections = this.afs.collection("recepie", ref =>
-      ref.where("userId","==",userId) //TODO-UID
+      ref.where("userId", "==", userId)
     );
     this.recepies = this.recepieCollections.snapshotChanges().pipe(
       map(changes => {
@@ -63,6 +65,8 @@ export class RecepiesService {
     );
     return this.recepies;
   }
+
+  //recipe for feed component - limit to 3
   getFeedRecepies(): Observable<any[]> {
     this.feedRecepieCollections = this.afs.collection("recepie", ref =>
       ref.orderBy("averageRating", "desc").limit(3)
@@ -79,20 +83,24 @@ export class RecepiesService {
     return this.recepies;
   }
 
+  //get single recipe
   getSingleRecepie(id: string): Observable<any> {
     this.recepieDoc = this.afs.doc(`recepie/${id}`);
     this.recepie = this.recepieDoc.valueChanges();
     return this.recepie;
   }
 
+  //add recipe
   setRecepie(id: string, recepie: any) {
     this.afs.doc(`recepie/${id}`).set(recepie);
   }
-  
-  deleteRecepie(id: string){
-    return this.afs.doc(`recepie/${id}`).delete()
+
+  //delete recipe
+  deleteRecepie(id: string) {
+    return this.afs.doc(`recepie/${id}`).delete();
   }
 
+  // Add a ratings
   addRating(recepieId: string, userId: string, rating: number) {
     let newRating: Rating = { userId: userId, rating: rating };
     let ratingPath = `recepie/${recepieId}/ratings/${recepieId}_${
@@ -102,13 +110,13 @@ export class RecepiesService {
     this.afs.doc(ratingPath).set(newRating);
   }
 
+  // Upload Recipe image
   uploadImage(file: File, path: string) {
-    this.task = this.afStore.upload(path, file);
-
-    // console.log(this.task.task.snapshot.downloadURL);
-    return this.task.task.snapshot.ref.getDownloadURL();
+     let url = this.afStore.upload(path, file).then((res) => {
+      return res.ref.getDownloadURL();
+     })
+     return url;
   }
-
 }
 interface Rating {
   userId: string;

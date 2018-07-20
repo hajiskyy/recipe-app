@@ -42,6 +42,9 @@ export class AuthService {
   get currentUserId(): string {
     return this.authenticated ? this.authState.uid : "";
   }
+  get currentUserEmail(): string {
+    return this.authenticated ? this.authState.email : "";
+  }
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {

@@ -11,6 +11,10 @@ export const environment = {
     projectId: "recepie-app",
     storageBucket: "recepie-app.appspot.com",
     messagingSenderId: "770766576838"
+  },
+  algolia: {
+    appId: 'QT4B02BTEF',
+    apiKey: '9cd2d85e348b48511dfdabcf211d01dd'
   }
 };
 

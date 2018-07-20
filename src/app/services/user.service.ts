@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import {
   AngularFirestore,
-  AngularFirestoreDocument,
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 import * as M from "materialize-css/dist/js/materialize";
@@ -19,7 +18,7 @@ export class UserService {
 
   getAuthor(id: string) {
     this.authorCollection = this.afs.collection("authors", ref =>
-      ref.where("userId", "==",`${id}`)
+      ref.where("userId", "==", `${id}`)
     );
 
     return this.authorCollection.valueChanges();

@@ -1,10 +1,16 @@
-# RecepieApp
+# Recipe App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+### Note:
+I quit this project because i realized that i'd have to be on a paid plan for spark in order to use 3rd party service outside of google cloud platform such as [Algolia](https://www.algolia.com/). Still feel free to use what's on here for any purpose wish.
+
+### Before you run
+Make sure you put your config details e.g firbase and angolia configurations in the environments folder and run `npm install` to install all dependencies
 
 ## Code scaffolding
 
